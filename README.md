@@ -17,5 +17,5 @@ Aplicación móvil de notas desarrollada con .NET MAUI que permite crear, editar
 - Windows: 11/10 (opcional)
 
 ### Clonar el repositorio
-git clone https://github.com/tuusuario/NotasMaui.git
+git clone https://github.com/Angelstid1/NotasMaui.git
 cd NotasMaui
