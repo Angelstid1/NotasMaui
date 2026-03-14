@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:NotasMaui.ViewModels"
+             xmlns:models="clr-namespace:NotasMaui.Models"  
+             x:Class="NotasMaui.NotesPage"
+             x:DataType="vm:NotesViewModel"
+             Title="Mis Notas"
+             BackgroundColor="#F5F5F5">
+
+    <VerticalStackLayout Spacing="0">
+
+        <!-- Barra de búsqueda con estilo -->
+        <SearchBar Text="{Binding SearchText}"
+                   Placeholder="Buscar notas..."
+                   Margin="12"
+                   BackgroundColor="White"
+                   TextColor="Black"
+                   HeightRequest="48"
+                   FontSize="16"/>
+
+        <!-- Lista de notas -->
+        <CollectionView ItemsSource="{Binding Notes}"
+                        SelectionMode="None"
+                        EmptyView="No hay notas aún...">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Note">
+
+                    <!-- Tarjeta principal con botones de acción -->
+                    <Frame BackgroundColor="White"
+                           CornerRadius="16"
+                           Padding="16"
+                           Margin="12,6"
+                           HasShadow="True"
+                           BorderColor="#E0E0E0">
+
+                        <VerticalStackLayout Spacing="8">
+
+                            <!-- Título -->
+                            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                <Label Text="📌"
+                                       FontSize="22"
+                                       IsVisible="{Binding IsPinned}"
+                                       VerticalOptions="Center"/>
+                                <Label Text="{Binding Title}"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="#212121"
+                                       VerticalOptions="Center"
+                                       MaxLines="1"
+                                       LineBreakMode="TailTruncation"/>
+                            </HorizontalStackLayout>
+
+                            <!-- Contenido -->
+                            <Label Text="{Binding Content}"
+                                   FontSize="14"
+                                   TextColor="#616161"
+                                   MaxLines="3"
+                                   LineBreakMode="TailTruncation"/>
+
+                            <!-- Fecha actualización -->
+                            <Label Text="{Binding UpdatedAt, StringFormat='Última edición: {0:dd MMM yyyy HH:mm}'}"
+                                   FontSize="12"
+                                   TextColor="#9E9E9E"
+                                   HorizontalOptions="End"/>
+
+                            <!-- Botones de acción (Editar y Eliminar) -->
+                            <HorizontalStackLayout Spacing="10" 
+                                                   HorizontalOptions="End"
+                                                   Margin="0,10,0,0">
+
+                                <!-- Botón Editar -->
+                                <Button Text="Editar"
+                                        Command="{Binding BindingContext.EditNoteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="#2196F3"
+                                        TextColor="White"
+                                        FontSize="14"
+                                        CornerRadius="8"
+                                        Padding="12,6"/>
+
+                                <!-- Botón Eliminar -->
+                                <Button Text="Eliminar"
+                                        Command="{Binding BindingContext.DeleteNoteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="#EF5350"
+                                        TextColor="White"
+                                        FontSize="14"
+                                        CornerRadius="8"
+                                        Padding="12,6"/>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- botón flotante + -->
+        <Button Text="+"
+                Command="{Binding AddNoteCommand}"
+                FontSize="36"
+                TextColor="White"
+                BackgroundColor="#2196F3"
+                WidthRequest="72"
+                HeightRequest="72"
+                CornerRadius="36"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="24"/>
+    </VerticalStackLayout>
+</ContentPage>

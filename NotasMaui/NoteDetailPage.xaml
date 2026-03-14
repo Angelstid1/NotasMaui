@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:NotasMaui.ViewModels"
+             x:Class="NotasMaui.NoteDetailPage"
+             x:DataType="vm:NoteDetailViewModel"
+             Title="Editar Nota"
+             BackgroundColor="#FFF0E0">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <Entry Text="{Binding CurrentNote.Title}"
+                   Placeholder="Título (obligatorio)"
+                   FontSize="18"
+                   BackgroundColor="#FFE8E0"
+                   TextColor="Black"
+                   PlaceholderColor="#666666"/>
+            <Editor Text="{Binding CurrentNote.Content}"
+                    Placeholder="Escribe tu nota aquí..."
+                    AutoSize="TextChanges"
+                    MinimumHeightRequest="200"
+                    FontSize="16"
+                    BackgroundColor="#FFE8E0"
+                    TextColor="Black"
+                    PlaceholderColor="#666666"/>
+            <HorizontalStackLayout Spacing="15" HorizontalOptions="End">
+                <Button Text="Cancelar"
+                        Command="{Binding CancelCommand}"
+                        BackgroundColor="#FFC0C0"
+                        TextColor="Black"
+                        CornerRadius="10"
+                        Padding="15,10"
+                        FontAttributes="Bold"/>
+                <Button Text="Guardar"
+                        Command="{Binding SaveCommand}"
+                        BackgroundColor="#C0E0C0"
+                        TextColor="Black"
+                        CornerRadius="10"
+                        Padding="20,10"
+                        FontAttributes="Bold"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
